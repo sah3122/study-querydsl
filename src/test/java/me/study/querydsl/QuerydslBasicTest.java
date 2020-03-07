@@ -49,7 +49,7 @@ public class QuerydslBasicTest {
     @Test
     void startJPQL() {
         //member1을 찾아라.
-        Member findByJpql = em.createQuery("select m from member m where m.username = :username", Member.class)
+        Member findByJpql = em.createQuery("select m from Member m where m.username = :username", Member.class)
                 .setParameter("username", "member1")
                 .getSingleResult();
 
@@ -64,6 +64,29 @@ public class QuerydslBasicTest {
                 .where(member.username.eq("member1"))
                 .fetchOne();
 
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    void search() {
+        Member findMember = queryFactory
+                .selectFrom(QMember.member)
+                .where(QMember.member.username.eq("member1")
+                        .and(QMember.member.age.eq(10)))
+                .fetchOne();
+
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    void searchAndParam() {
+        Member findMember = queryFactory.selectFrom(QMember.member)
+                .where(
+                        QMember.member.username.eq("member1"),
+                        QMember.member.age.eq(10)
+                )
+                .fetchOne();
+        
         assertThat(findMember.getUsername()).isEqualTo("member1");
     }
 }
