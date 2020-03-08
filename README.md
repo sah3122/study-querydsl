@@ -42,4 +42,18 @@
     * fetchResults() : 페이징 정보 포함, total count 쿼리 추가 실행
     * fetchCount() : count 쿼리로 변경해서 count 수 조회
 * 페이징
+* 집합
+    * JPQL
+        * select
+        * COUNT(m), //회원수
+        * SUM(m.age), //나이 합
+        * AVG(m.age), //평균 나이
+        * MAX(m.age), //최대 나이
+        * MIN(m.age) //최소 나이
+        * from Member m
+    * JPQL이 제공하는 모든 집합 함수를 제공
+    * tuple은 프로젝션과 결과반환에서 설명
+    * group by
+        
+    
     
