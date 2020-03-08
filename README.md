@@ -54,6 +54,17 @@
     * JPQL이 제공하는 모든 집합 함수를 제공
     * tuple은 프로젝션과 결과반환에서 설명
     * group by
-        
+* 조인 - 기본 조인
+    * 기본 조인  
+    조인의 기본 문법은 첫 번째 파라미터에 조인 대상 지정, 두번째 파라미터에 별칭(alias)로 사용할 Q 타입 지정
+    * join() , innerJoin() : 내부 조인(inner join)
+    * leftJoin() : left 외부 조인(left outer join)
+    * rightJoin() : rigth 외부 조인(rigth outer join)
+    * JPQL의 on 과 성능 최적화를 위한 fetch 조인 제공 다음 on 절에서 설명
+    * 세타 조인  
+    연관 관계가 없는 필드로 조인
+    * from 절에 여러 엔티티를 선택해서 세타 조인
+    * 외부 조인 불가능 다음에 설명할 조인 on을 사용하면 외부 조인 가능
+
     
     
