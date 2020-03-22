@@ -144,9 +144,12 @@
       작 시점에 진짜 엔티티 매니저를 찾아주는 프록시용 가짜 엔티티 매니저이다. 이 가짜 엔티티 매니저는 실제
       사용 시점에 트랜잭션 단위로 실제 엔티티 매니저(영속성 컨텍스트)를 할당해준다.
       > 더 자세한 내용은 자바 ORM 표준 JPA 책 13.1 트랜잭션 범위의 영속성 컨텍스트를 참고하자.
-* 동적 쿼리와 성능 최적화 조회 - builder 사용
-    * DTO 조회
-        * QueryProjection 사용  
-        QueryProjection을 사용하면 DTO가 Querydsl에 의존하게 된다.  
-        이러한 의존 관계를 갖지 않으려면 Projection.bean, fields, constructor를 사용하면 된다. 
-        
+* 동적 쿼리와 성능 최적화 조회 
+    * builder 사용
+        * DTO 조회
+            * QueryProjection 사용  
+            QueryProjection을 사용하면 DTO가 Querydsl에 의존하게 된다.  
+            이러한 의존 관계를 갖지 않으려면 Projection.bean, fields, constructor를 사용하면 된다.
+    * where절 파라미터 사용
+         * where 절에 파라미터 방식을 사용하면 조건 재사용 가능 (null check를 잘 해야 함)
+
