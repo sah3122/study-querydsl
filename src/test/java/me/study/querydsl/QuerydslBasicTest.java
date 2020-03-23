@@ -196,12 +196,12 @@ public class QuerydslBasicTest {
                         member.age.avg(),
                         member.age.max(),
                         member.age.min()
-                        )
+                )
                 .from(member)
                 .fetch();
 
         Tuple tuple = result.get(0);
-        
+
         assertThat(tuple.get(member.count())).isEqualTo(4);
         assertThat(tuple.get(member.age.sum())).isEqualTo(100);
     }
@@ -417,9 +417,9 @@ public class QuerydslBasicTest {
     void complexCase() {
         queryFactory
                 .select(new CaseBuilder()
-                    .when(member.age.between(0, 20)).then("0 ~ 20살")
-                    .when(member.age.between(21, 30)).then("21 ~ 30살")
-                    .otherwise("기타"))
+                        .when(member.age.between(0, 20)).then("0 ~ 20살")
+                        .when(member.age.between(21, 30)).then("21 ~ 30살")
+                        .otherwise("기타"))
                 .from(member)
                 .fetch();
     }

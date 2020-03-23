@@ -74,10 +74,10 @@ public class MemberJpaRepository {
         if (hasText(condition.getTeamName())) {
             builder.and(team.name.eq(condition.getTeamName()));
         }
-        if(condition.getAgeGoe() != null) {
+        if (condition.getAgeGoe() != null) {
             builder.and(member.age.goe(condition.getAgeGoe()));
         }
-        if(condition.getAgeLoe() != null) {
+        if (condition.getAgeLoe() != null) {
             builder.and(member.age.loe(condition.getAgeLoe()));
         }
         return queryFactory
