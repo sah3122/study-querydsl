@@ -2,6 +2,7 @@ package me.study.querydsl.repository;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import me.study.querydsl.dto.MemberSearchCondition;
@@ -9,6 +10,7 @@ import me.study.querydsl.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.support.PageableExecutionUtils;
 
 import java.util.List;
 
@@ -73,6 +75,17 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
 
+        JPAQuery<Member> countQuery = queryFactory
+                .selectFrom(member)
+                .leftJoin(member.team, team)
+                .where(
+                        usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe()),
+                        ageBetween(condition.getAgeLoe(), condition.getAgeLoe())
+                );
+
         long total = queryFactory
                 .selectFrom(member)
                 .leftJoin(member.team, team)
@@ -85,7 +98,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                 )
                 .fetchCount();
 
-        return new PageImpl<>(members, pageable, total); // content 쿼리랑 실제 쿼리랑 분리를 해서 카운트 쿼리를 최적화 할 수 있다.
+        return PageableExecutionUtils.getPage(members, pageable, countQuery::fetchCount);
+        //return new PageImpl<>(members, pageable, total); // content 쿼리랑 실제 쿼리랑 분리를 해서 카운트 쿼리를 최적화 할 수 있다.
     }
 
     private BooleanExpression ageBetween(int ageLoe, int ageGoe) {

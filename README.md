@@ -164,3 +164,8 @@
         * fetchResult를 사용해서 한번에 조회 후Result와 count를 PageImpl에 담아준다.
     * 데이터 내용과 전체 카운트를 별도로 조회 하는 방법
         * fetch와 count쿼리를 두번 날려 각각의 리턴값을 PageImpl 에 담아준다.
+    * Count Query 최적화
+        * PagableExecutionUtils.getPage() 최적화
+        * 스프링 데이터 라이브러리가 제공
+            * 페이지가 시작페이지 이면서 전체 사이즈가 페이지 사이즈 보다 작을떄
+            * 마지막 페이지일때 사용가능
