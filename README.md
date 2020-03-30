@@ -172,3 +172,9 @@
     * Pagable - sort
         * 스프링 데이터에서 제공하는 sorting기능을 그대로 사용하기엔 무리가 있다.  
         조인을 한다거나 동적 정렬 기능 등리 필요하면 스프링 데이터에서 제공하는 sorting 보다 파라미터를 받아 사용하는 방식을 권장.            
+* QuerydslPredicateExecutor Interface
+    * Sort, Paging 지원
+    * 한계점
+        * 조인 불가능
+        * 클라이언트가 Querydsl에 의존한다. (Sevice layer가 Querydsl이라는 구현기술에 의존)
+        * 복잡한 환경에서 사용 불가능
