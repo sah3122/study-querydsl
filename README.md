@@ -178,3 +178,9 @@
         * 조인 불가능
         * 클라이언트가 Querydsl에 의존한다. (Sevice layer가 Querydsl이라는 구현기술에 의존)
         * 복잡한 환경에서 사용 불가능
+* Querydsl Web 지원
+    * Docs : https://docs.spring.io/spring-data/jpa/docs/2.2.3.RELEASE/reference/html/#core.web.type-safe
+    * 한계점
+        * 단순한 조건만 가능하다.
+        * 조건을 커스텀 하는 기능이 복잡, 명시적이지 않다.
+        * 컨트롤러가 Querydsl에 의존하는 문제점도 존재한다.
