@@ -184,3 +184,11 @@
         * 단순한 조건만 가능하다.
         * 조건을 커스텀 하는 기능이 복잡, 명시적이지 않다.
         * 컨트롤러가 Querydsl에 의존하는 문제점도 존재한다.
+* QueryDslRepositorySupport
+    * 장점
+        * 스프링 데이터가 제공하는 페이징을 Querydsl로 편리하게 변환 가능(단! Sort는 오류발생)
+            * getQuerydsl().applyPagination()
+        * EntityManager 제공
+    * 한계
+        * QueryFactory 를 제공하지 않음
+        * 스프링 데이터 Sort 기능이 정상 동작하지 않음
