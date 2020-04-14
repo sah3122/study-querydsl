@@ -20,28 +20,29 @@ import static me.study.querydsl.entity.QMember.member;
 import static me.study.querydsl.entity.QTeam.team;
 import static org.springframework.util.StringUtils.hasText;
 
-//@RequiredArgsConstructor
-public class MemberRepositoryImpl extends QuerydslRepositorySupport implements MemberRepositoryCustom {
+//extends QuerydslRepositorySupport
+@RequiredArgsConstructor
+public class MemberRepositoryImpl implements MemberRepositoryCustom {
 
-    public MemberRepositoryImpl() {
-        super(Member.class);
-    }
+//    public MemberRepositoryImpl() {
+//        super(Member.class);
+//    }
 
-    //private final JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public List<Member> search(MemberSearchCondition condition) {
-        from(member)
-                .leftJoin(member.team, team)
-                .where(
-                        usernameEq(condition.getUsername()),
-                        teamNameEq(condition.getTeamName()),
-                        ageGoe(condition.getAgeGoe()),
-                        ageLoe(condition.getAgeLoe()),
-                        ageBetween(condition.getAgeLoe(), condition.getAgeLoe())
-                )
-                .select(member)
-                .fetch();
+//        from(member)
+//                .leftJoin(member.team, team)
+//                .where(
+//                        usernameEq(condition.getUsername()),
+//                        teamNameEq(condition.getTeamName()),
+//                        ageGoe(condition.getAgeGoe()),
+//                        ageLoe(condition.getAgeLoe()),
+//                        ageBetween(condition.getAgeLoe(), condition.getAgeLoe())
+//                )
+//                .select(member)
+//                .fetch();
         return queryFactory
                 .selectFrom(member)
                 .leftJoin(member.team, team)
@@ -76,25 +77,25 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements M
         return new PageImpl<>(content, pageable, total);
     }
 
-    @Override
-    public Page<Member> searchPageSimple2(MemberSearchCondition condition, Pageable pageable) {
-        JPQLQuery<Member> select = from(member)
-                .leftJoin(member.team, team)
-                .where(
-                        usernameEq(condition.getUsername()),
-                        teamNameEq(condition.getTeamName()),
-                        ageGoe(condition.getAgeGoe()),
-                        ageLoe(condition.getAgeLoe()),
-                        ageBetween(condition.getAgeLoe(), condition.getAgeLoe())
-                )
-                .select(member);
-        JPQLQuery<Member> query = getQuerydsl().applyPagination(pageable, select);
-
-        List<Member> content = results.getResults(); // 실제 쿼리 내역
-        long total = results.getTotal(); // 전체 수
-
-        return new PageImpl<>(content, pageable, total);
-    }
+//    @Override
+//    public Page<Member> searchPageSimple2(MemberSearchCondition condition, Pageable pageable) {
+//        JPQLQuery<Member> select = from(member)
+//                .leftJoin(member.team, team)
+//                .where(
+//                        usernameEq(condition.getUsername()),
+//                        teamNameEq(condition.getTeamName()),
+//                        ageGoe(condition.getAgeGoe()),
+//                        ageLoe(condition.getAgeLoe()),
+//                        ageBetween(condition.getAgeLoe(), condition.getAgeLoe())
+//                )
+//                .select(member);
+//        JPQLQuery<Member> query = getQuerydsl().applyPagination(pageable, select);
+//
+//        List<Member> content = results.getResults(); // 실제 쿼리 내역
+//        long total = results.getTotal(); // 전체 수
+//
+//        return new PageImpl<>(content, pageable, total);
+//    }
 
     @Override
     public Page<Member> searchPageComplex(MemberSearchCondition condition, Pageable pageable) {
